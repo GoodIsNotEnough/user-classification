@@ -1,0 +1,57 @@
+ALTER TABLE idl_user_eduagenet_shopping_subroot_tmp DROP PARTITION(ds <= "{p0}" );
+INSERT INTO idl_user_eduagenet_shopping_subroot_tmp PARTITION (ds="{p0}")
+SELECT
+mobile_no,  
+subroot_num,
+subroot_map
+FROM 
+    (SELECT
+    t0.mobile_no,  
+    coalesce(t4.subroot_num,0) AS subroot_num,
+    t4.subroot_map,
+    row_number()over(partition BY t0.mobile_no ORDER BY t4.subroot_num DESC) AS ranks
+    FROM
+        (SELECT
+        mobile_raw,	
+        mobile_no	
+        FROM idl_daily_active_mobile_detail_tmp
+        WHERE ds='{p0}'
+        ) t0
+    LEFT JOIN
+        (SELECT
+        t3.mobile_raw, 
+        count(t3.subroot_cid) subroot_num,
+        str_to_map(concat_ws("\073",collect_set(concat_ws("\072",CAST(t3.subroot_cid AS STRING),CAST(t3.order_num AS STRING)))),"\073","\072") AS subroot_map
+        FROM 
+            (SELECT
+            t1.mobile_raw,               
+            t2.subroot_cid,              
+            sum(t1.tid_num) AS order_num 
+            FROM 
+                (SELECT 
+                mobile_raw,
+                cid_id AS cid,
+                sum(tid_num) AS tid_num 
+                FROM idl_limao_user_cid_tmp t0
+                WHERE ds='{p0}'
+                GROUP BY mobile_raw,name_raw,cid_id
+                ) t1
+                LEFT JOIN
+                (SELECT 
+                cid,        
+                subroot_cid 
+                FROM idl_limao_cid_dim
+                WHERE ds='{p0}'
+                ) t2
+                ON t1.cid=t2.cid
+                WHERE t2.cid IS NOT NULL
+                group by t1.mobile_raw,t2.subroot_cid
+            ) t3
+          group by t3.mobile_raw
+          ) t4
+    ON t0.mobile_raw=t4.mobile_raw
+    WHERE t4.mobile_raw IS NOT NULL
+    ) t
+WHERE ranks=1;
+
+      

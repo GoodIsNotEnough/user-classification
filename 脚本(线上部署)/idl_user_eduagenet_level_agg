@@ -1,0 +1,35 @@
+ALTER TABLE idl_user_eduagenet_level_agg DROP PARTITION(ds <= "{p3}" );
+ALTER TABLE idl_user_eduagenet_level_agg DROP PARTITION(ds = "{p0}" );
+
+INSERT INTO idl_user_eduagenet_level_agg PARTITION (ds="{p0}")
+SELECT 
+mobile_no,
+score_edu,
+level_edu,
+score_age,
+level_age,
+score_net,
+level_net
+FROM idl_user_eduagenet_level_tmp
+WHERE ds = "{p0}"
+UNION ALL
+SELECT
+t0.mobile_no,
+t0.score_edu,
+t0.level_edu,
+t0.score_age,
+t0.level_age,
+t0.score_net,
+t0.level_net 
+FROM 
+     (SELECT *
+      FROM idl_user_eduagenet_level_agg
+      WHERE ds="{p2}"
+      ) t0
+      LEFT JOIN 
+      (SELECT *
+      FROM idl_user_eduagenet_level_tmp
+      WHERE ds="{p0}"
+      )t1 
+      ON t0.mobile_no = t1.mobile_no
+WHERE t1.mobile_no IS NULL;

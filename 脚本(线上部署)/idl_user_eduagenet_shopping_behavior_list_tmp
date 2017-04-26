@@ -1,0 +1,89 @@
+ALTER TABLE idl_user_eduagenet_shopping_behavior_list_tmp DROP PARTITION(ds <= "{p0}" );
+INSERT INTO idl_user_eduagenet_shopping_behavior_list_tmp PARTITION (ds="{p0}")
+SELECT 
+mobile_no,
+total_pay,
+avg_item,
+tid_sum,
+sf_sum,
+high_sum,
+middle_sum,
+low_sum,
+receivers AS receiver_list,
+seller_sum,
+phone_sum,
+pc_sum,
+morning_sum,
+afternoon_sum,
+evening_sum,
+midnight_sum,
+workday_sum	            
+FROM
+    (SELECT 
+    mobile_no,
+    total_pay,
+    avg_item,
+    tid_sum,
+    sf_sum,
+    high_sum,
+    middle_sum,
+    low_sum,
+    receivers,
+    seller_sum,
+    phone_sum,
+    pc_sum,
+    morning_sum,
+    afternoon_sum,
+    evening_sum,
+    midnight_sum,
+    workday_sum,
+    row_number() over (PARTITION BY t1.mobile_no ORDER BY t2.tid_sum desc) AS rn  
+    FROM  
+        (SELECT 
+         limao_nick,
+         mobile_no
+         FROM
+            (SELECT 
+             limao_nick,
+             mobile_no,
+             row_number()over(partition BY limao_nick ORDER BY weigth DESC) AS ranks
+             FROM ald_limao_receiver_tmp
+             WHERE ds='{p0}'
+             ) t0
+         WHERE ranks=1
+         ) t1
+    LEFT JOIN  
+        (SELECT 
+         s.buyer_nick,
+         s.total_pay,
+         s.avg_item,
+         s.tid_sum,
+         s.sf_sum,
+         s.high_sum,
+         s.middle_sum,
+         s.low_sum,
+         s.receivers,
+         b.seller_sum,
+         b.phone_sum,
+         b.pc_sum,
+         b.morning_sum,
+         b.afternoon_sum,
+         b.evening_sum,
+         b.midnight_sum,
+         b.workday_sum
+        FROM 
+            (SELECT * 
+             FROM idl_user_sens_tmp
+             WHERE ds ="{p0}"
+             ) s
+             LEFT JOIN 
+             (SELECT *
+             FROM idl_user_behavior_tmp
+             WHERE ds ="{p0}"
+             ) b 
+             ON s.buyer_nick = b.buyer_nick 
+        ) t2
+    ON t1.limao_nick=t2.buyer_nick
+    WHERE t2.buyer_nick IS NOT NULL 
+    ) t3
+WHERE rn=1;
