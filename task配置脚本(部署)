@@ -1,0 +1,216 @@
+-- idl_user_eduagenet_email_list_tmp;
+-- idl_user_eduagenet_email_tmp;
+-- idl_user_eduagenet_registration_occupation_tmp;
+-- idl_user_eduagenet_shopping_behavior_list_tmp;
+-- idl_user_eduagenet_shopping_behavior_tmp;
+-- idl_user_eduagenet_shopping_subroot_tmp;
+-- idl_user_eduagenet_data_union_tmp;
+-- idl_user_eduagenet_level_tmp;
+-- idl_user_eduagenet_level_agg;
+
+-- idl_user_eduagenet_email_list_tmp
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("idl_user_eduagenet_email_list_tmp",
+      "./task_file/data_portrait/idl_user_eduagenet_email_list_tmp",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("idl_user_eduagenet_email_list_tmp",
+     "idl_user_eduagenet_email_list_tmp",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_email_list_tmp",
+     "idl_limao_email_tmp",
+     now());
+
+-- idl_user_eduagenet_email_tmp
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("idl_user_eduagenet_email_tmp",
+      "./task_file/data_portrait/idl_user_eduagenet_email_tmp",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("idl_user_eduagenet_email_tmp",
+     "idl_user_eduagenet_email_tmp",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_email_tmp",
+     "idl_user_eduagenet_email_list_tmp",
+     now());
+     
+-- idl_user_eduagenet_registration_occupation_tmp
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("idl_user_eduagenet_registration_occupation_tmp",
+      "./task_file/data_portrait/idl_user_eduagenet_registration_occupation_tmp",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("idl_user_eduagenet_registration_occupation_tmp",
+     "idl_user_eduagenet_registration_occupation_tmp",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_registration_occupation_tmp",
+     "ald_limao_receiver_tmp",
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_registration_occupation_tmp",
+     "idl_limao_info_dim",
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_registration_occupation_tmp",
+     "idl_user_address_summar_tmp",
+     now());
+     
+-- idl_user_eduagenet_shopping_behavior_list_tmp;
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("idl_user_eduagenet_shopping_behavior_list_tmp",
+      "./task_file/data_portrait/idl_user_eduagenet_shopping_behavior_list_tmp",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("idl_user_eduagenet_shopping_behavior_list_tmp",
+     "idl_user_eduagenet_shopping_behavior_list_tmp",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_shopping_behavior_list_tmp",
+     "ald_limao_receiver_tmp",
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_shopping_behavior_list_tmp",
+     "idl_user_sens_tmp",
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_shopping_behavior_list_tmp",
+     "idl_user_behavior_tmp",
+     now());
+     
+-- idl_user_eduagenet_shopping_behavior_tmp; 
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("idl_user_eduagenet_shopping_behavior_tmp",
+      "./task_file/data_portrait/idl_user_eduagenet_shopping_behavior_tmp",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("idl_user_eduagenet_shopping_behavior_tmp",
+     "idl_user_eduagenet_shopping_behavior_tmp",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_shopping_behavior_tmp",
+     "idl_user_eduagenet_shopping_behavior_list_tmp",
+     now());
+
+-- idl_user_eduagenet_shopping_subroot_tmp;
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("idl_user_eduagenet_shopping_subroot_tmp",
+      "./task_file/data_portrait/idl_user_eduagenet_shopping_subroot_tmp",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("idl_user_eduagenet_shopping_subroot_tmp",
+     "idl_user_eduagenet_shopping_subroot_tmp",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_shopping_subroot_tmp",
+     "idl_daily_active_mobile_detail_tmp",
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_shopping_subroot_tmp",
+     "idl_limao_user_cid_tmp",
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_shopping_subroot_tmp",
+     "idl_limao_cid_dim",
+     now());
+     
+-- idl_user_eduagenet_data_union_tmp;
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("idl_user_eduagenet_data_union_tmp",
+      "./task_file/data_portrait/idl_user_eduagenet_data_union_tmp",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("idl_user_eduagenet_data_union_tmp",
+     "idl_user_eduagenet_data_union_tmp",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_data_union_tmp",
+     "idl_user_eduagenet_email_tmp",
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_data_union_tmp",
+     "idl_user_eduagenet_registration_occupation_tmp",
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_data_union_tmp",
+     "idl_user_eduagenet_shopping_behavior_tmp",
+     now());  
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_data_union_tmp",
+     "idl_user_eduagenet_shopping_subroot_tmp",
+     now());        
+
+-- idl_user_eduagenet_level_tmp;
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("idl_user_eduagenet_level_tmp",
+      "./task_file/data_portrait/idl_user_eduagenet_level_tmp",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("idl_user_eduagenet_level_tmp",
+     "idl_user_eduagenet_level_tmp",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_level_tmp",
+     "idl_user_eduagenet_data_union_tmp",
+     now());
+     
+-- idl_user_eduagenet_level_agg;
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("idl_user_eduagenet_level_agg",
+      "./task_file/data_portrait/idl_user_eduagenet_level_agg",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("idl_user_eduagenet_level_agg",
+     "idl_user_eduagenet_level_agg",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("idl_user_eduagenet_level_agg",
+     "idl_user_eduagenet_level_tmp",
+     now());

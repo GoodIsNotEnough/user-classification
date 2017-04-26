@@ -1,0 +1,123 @@
+-- 配置基本的task信息
+-- tmp_idl_user_eduagenet_email_tmp.sql;
+-- tmp_idl_user_eduagenet_shopping_behavior_tmp.sql;
+-- tmp_idl_user_eduagenet_data_union_tmp.sql;
+-- tmp_idl_user_eduagenet_level_agg.sql;
+
+-- tmp_idl_user_eduagenet_email_tmp.sql;
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("tmp_idl_user_eduagenet_email_tmp",
+      "./task_file/tmp/tmp_idl_user_eduagenet_email_tmp.sql",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("tmp_idl_user_eduagenet_email_tmp",
+     "tmp_idl_user_eduagenet_email_tmp",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("tmp_idl_user_eduagenet_email_tmp",
+     "tmp_idl_user_eduagenet_email_list_tmp",
+     now());
+
+-- tmp_idl_user_eduagenet_shopping_behavior_tmp.sql;
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("tmp_idl_user_eduagenet_shopping_behavior_tmp",
+      "./task_file/tmp/tmp_idl_user_eduagenet_shopping_behavior_tmp.sql",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("tmp_idl_user_eduagenet_shopping_behavior_tmp",
+     "tmp_idl_user_eduagenet_shopping_behavior_tmp",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("tmp_idl_user_eduagenet_shopping_behavior_tmp",
+     "tmp_idl_user_eduagenet_shopping_behavior_list_tmp",
+     now());
+
+-- tmp_idl_user_eduagenet_data_union_tmp.sql;
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("tmp_idl_user_eduagenet_data_union_tmp",
+      "./task_file/tmp/tmp_idl_user_eduagenet_data_union_tmp.sql",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("tmp_idl_user_eduagenet_data_union_tmp",
+     "tmp_idl_user_eduagenet_data_union_tmp",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("tmp_idl_user_eduagenet_data_union_tmp",
+     "tmp_idl_user_eduagenet_email_tmp",
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("tmp_idl_user_eduagenet_data_union_tmp",
+     "tmp_idl_user_eduagenet_shopping_behavior_tmp",
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("tmp_idl_user_eduagenet_data_union_tmp",
+     "tmp_idl_user_eduagenet_registration_occupation_tmp",
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("tmp_idl_user_eduagenet_data_union_tmp",
+     "tmp_idl_user_eduagenet_shopping_subroot_tmp",
+     now());
+    
+-- tmp_idl_user_eduagenet_level_agg.sql;
+INSERT INTO config_task_log(task_name,file_path,insertdt,updatedt,connect_type,task_type,outtimes)
+VALUES ("tmp_idl_user_eduagenet_level_agg",
+      "./task_file/tmp/tmp_idl_user_eduagenet_level_agg.sql",
+      now(),
+      now(),
+      "hive_f",
+      "daily",
+      "03:00:00");
+INSERT INTO config_taregt_log(task_name,target_obj,is_chack,updatedt)
+VALUES("tmp_idl_user_eduagenet_level_agg",
+     "tmp_idl_user_eduagenet_level_agg",
+     0,
+     now());
+INSERT INTO config_rely_log(task_name,parent_obj,updatedt)
+VALUES("tmp_idl_user_eduagenet_level_agg",
+     "tmp_idl_user_eduagenet_data_union_tmp",
+     now());
+     
+-- 配置job信息
+INSERT INTO plan_job_config (job_name,job_type,PARAMETER,par_end,PARALLEL,begin_time,insertdt,updatedt,job_status,is_debug)
+VALUES ("tmp_idl_user_eduagenet_tmp",
+      "daily",
+      "2017-01-01",
+      "2016-04-09",
+      2,
+      "00:00:00",
+      now(),
+      now(),
+      0,
+      1);
+
+INSERT INTO plan_orltask_log(job_name,task_name,insertdt)
+VALUES("tmp_idl_user_eduagenet_tmp",
+     "tmp_idl_user_eduagenet_email_tmp",
+     now());
+INSERT INTO plan_orltask_log(job_name,task_name,insertdt)
+VALUES("tmp_idl_user_eduagenet_tmp",
+     "tmp_idl_user_eduagenet_shopping_behavior_tmp",
+     now());
+INSERT INTO plan_orltask_log(job_name,task_name,insertdt)
+VALUES("tmp_idl_user_eduagenet_tmp",
+     "tmp_idl_user_eduagenet_data_union_tmp",
+     now());
+INSERT INTO plan_orltask_log(job_name,task_name,insertdt)
+VALUES("tmp_idl_user_eduagenet_tmp",
+     "tmp_idl_user_eduagenet_level_agg",
+     now());
