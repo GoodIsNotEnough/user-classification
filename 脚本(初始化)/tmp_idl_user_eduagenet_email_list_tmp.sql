@@ -78,7 +78,7 @@ SELECT mobile_no,
                                          split(lower(email),"@")[0] as email_name,
                                          split(lower(email),"@")[1] as email_domain
                                          FROM idl_limao_email_agg
-                                         where ds='2017-04-18' and mobile_no is not null
+                                         where ds='2017-04-20' and mobile_no is not null
                                      ) t0
                         ) t1 
                 )t2 

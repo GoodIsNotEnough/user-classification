@@ -28,7 +28,7 @@ FROM
         mobile_raw,	
         mobile_no	
         FROM idl_user_mobile_initial_agg
-        WHERE ds='2017-04-18'
+        WHERE ds='2017-04-20'
         ) t0
     LEFT JOIN
         (SELECT
@@ -46,14 +46,14 @@ FROM
                 cid,        
                 tid_num     
                 FROM idl_limao_user_cid_agg
-                WHERE ds='2017-04-18'
+                WHERE ds='2017-04-20'
                 ) t1
                 LEFT JOIN
                 (SELECT 
                 cid,        
                 subroot_cid 
                 FROM idl_limao_cid_dim
-                WHERE ds='2017-04-18'
+                WHERE ds='2017-04-20'
                 ) t2
                 ON t1.cid=t2.cid
                 WHERE t2.cid IS NOT NULL

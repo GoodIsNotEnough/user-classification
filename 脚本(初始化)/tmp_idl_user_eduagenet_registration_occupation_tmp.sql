@@ -31,12 +31,12 @@ FROM
     FROM 
         (SELECT mobile_no,limao_nick
         FROM ald_limao_receiver_agg
-        WHERE ds='2017-03-26'
+        WHERE ds='2017-04-20'
         ) t1
     LEFT JOIN 
         (SELECT limao_nick,registrytime
         FROM idl_limao_info_dim
-        WHERE ds='2017-03-26'
+        WHERE ds='2017-04-20'
         ) t2
     ON t1.limao_nick=t2.limao_nick
     LEFT JOIN 
@@ -46,7 +46,7 @@ FROM
         IF(updatedt_home IS NULL, 0, 1) home_address, 
         IF(updatedt_work IS NULL, 0, 1) work_address
         FROM idl_user_address_summar_agg
-        WHERE ds='2017-03-26'
+        WHERE ds='2017-04-20'
         ) t3
     ON t3.mobile_no=t1.mobile_no
     WHERE t2.limao_nick IS NOT NULL AND t3.mobile_no IS NOT NULL

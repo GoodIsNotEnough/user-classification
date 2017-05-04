@@ -67,12 +67,12 @@ FROM
     from 
         (select mobile_no,limao_nick
         from ald_limao_receiver_agg
-        where ds='2017-04-18'
+        where ds='2017-04-20'
         ) t1
     left join 
         (select *
         from idl_user_sens_agg
-        where ds='2017-04-18'
+        where ds='2017-04-20'
         ) t2
     on t1.limao_nick=t2.buyer_nick
     where t2.buyer_nick is not null
