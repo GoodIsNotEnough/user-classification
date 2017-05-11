@@ -47,8 +47,8 @@
   1）"daily"的job仅能执行daily的task；
   2）PARAMETER和par_end的格式：jobtype是"daily"时为"yyyy-mm-dd"；是jobtype是"hour"时为"yyyy-mm-dd-hh"；
   3）job不会触发的条件是当PARAMETER大于par_end，并且当前时间大于begin_time的时候。所有我们停止某个job的触发，只需要将par_end设置成非常小的值；
-  4）
-  5）关于当is_debug=1的情况，
+  4）job_status,1代表上一次正常结束
+  5）关于当is_debug=1的情况，0结束时间会自增，1需要手动配置
 
   INSERT INTO plan_orltask_log(job_name,task_name,insertdt)
   VALUES("recommended_cid_tmp",

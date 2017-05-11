@@ -22,10 +22,10 @@ IF(score_age<0.5000461,0,1) AS level_age,
 score_net,
 IF(score_net<0.30,0,IF(score_net<0.49989798,1,2)) AS level_net
 FROM idl_user_eduagenet_level_agg
-WHERE ds = '2017-05-07';
+WHERE ds = '2017-05-08';
 
-ALTER TABLE idl_user_eduagenet_level_agg DROP PARTITION (ds="2017-05-07" );
-INSERT INTO idl_user_eduagenet_level_agg PARTITION (ds="2017-05-07")
+ALTER TABLE idl_user_eduagenet_level_agg DROP PARTITION (ds="2017-05-08" );
+INSERT INTO idl_user_eduagenet_level_agg PARTITION (ds="2017-05-08")
 SELECT 
 mobile_no,
 score_edu,
