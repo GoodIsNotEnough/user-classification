@@ -3,11 +3,11 @@ INSERT INTO idl_user_eduagenet_level_tmp PARTITION (ds="{p0}")
 SELECT 
 mobile_no,
 score_edu,
-IF(score_edu<0.00163121108,0,IF(score_edu<0.08979831464,1,2)) AS level_edu,
+IF(score_edu<0.15690,0,IF(score_edu<0.404511,1,2)) AS level_edu,
 score_age,
-IF(score_age<0.44739539242,0,IF(score_age<0.99676504479,1,2)) AS level_age,
+IF(score_age<0.5,0,IF(score_age<0.6,-1,1)) AS level_age,
 score_net,
-IF(score_net<0.02422610792,0,IF(score_net<0.55386515371,1,2)) AS level_net
+IF(score_net<0.30,0,IF(score_net<0.49989798,1,2)) AS level_net
 FROM 
     (SELECT
     t3.mobile_no,
