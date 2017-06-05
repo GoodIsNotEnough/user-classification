@@ -1,0 +1,47 @@
+ALTER TABLE idl_user_eduagenet_shopping_subroot_tmp DROP PARTITION(ds <= "{p0}");
+
+INSERT INTO idl_user_eduagenet_shopping_subroot_tmp PARTITION (ds="{p0}")
+SELECT 
+mobile_no,
+subroot_num,
+subroot_map
+FROM
+(SELECT 
+t3.mobile_no,
+count(t3.subroot_cid) subroot_num,
+str_to_map(concat_ws("\073",collect_set(concat_ws("\072",CAST(t3.subroot_cid AS STRING),CAST(t3.order_num AS STRING)))),"\073","\072") AS subroot_map
+FROM
+    (SELECT 
+    t1.mobile_no,
+    t2.subroot_cid,
+    sum(t1.tid_num) AS order_num
+    FROM
+        (SELECT 
+        t02.mobile_no,
+        t01.cid_id AS cid,
+        t01.tid_num
+        FROM idl_limao_user_cid_tmp t01
+        LEFT JOIN
+            (SELECT  --组合去重
+            DISTINCT mobile_raw,
+            mobile_no
+            FROM idl_daily_active_mobile_detail_tmp
+            WHERE ds='{p0}'
+             ) t02 
+        ON t01.mobile_raw=t02.mobile_raw
+        WHERE ds='{p0}' AND t02.mobile_no IS NOT NULL
+        ) t1
+    LEFT JOIN
+    (SELECT 
+    cid,
+    subroot_cid
+    FROM idl_limao_cid_dim
+    WHERE ds='{p0}'
+     ) t2 
+   ON t1.cid=t2.cid
+   WHERE t2.cid IS NOT NULL
+   GROUP BY t1.mobile_no, t2.subroot_cid
+   ) t3
+  GROUP BY t3.mobile_no
+) t;
+
